@@ -318,3 +318,7 @@ cd R:\Windows\System32\Recovery
 del WinRE.wim
 # if you dont find the file here, find the WinRE.wim in System32 folder everywhere and delete that (if you dont find that in Recovery folder for some reason)
 ```
+
+## Apply Drivers (Step 6.4)
+Now will have to apply Drivers to the windows on a52.<br>
+First downalod this https://github.com/arminask/windows_samsung_platforms/archive/refs/heads/a52q.zip
