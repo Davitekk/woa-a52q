@@ -1,32 +1,33 @@
 # Install Windows on Galaxy A52 4G
 
-# JUST wait here and read this all before beginning !!!!!!
+## Please read everything carefully and don't skip any parts, doing so, may brick your device!
 
 ## Disclaimers
 
 > [!WARNING]
-> - If you see a warning and/or error during the process which is not specified in the guides, it is NOT normal then. Contact us on Discord if you see anything odd, but do not continue or proceed on your own, you will break things further.
+> - If you see a warning and/or error during the process which is not specified in the guides, it is NOT normal. Contact us on Discord if you see anything odd, but do not continue or proceed on your own, you may break things further.
 > - Don't rerun the commands if you interrupt the process. You may break your partition table.
 > - Do not run all commands at once. 
-> - Do not commit *any* typo with *any* commands.
+> - Do not commit *any* typo with *any* command.
 > - Be familiar with command line interfaces.
-> - ALso Note that Samsung A52 4G doesnot have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions
-> - Users have already messed up their phone while fixing UFS and/or partitioning the device. So please be very very ultra careful
+> - Also Note that Samsung A52 4G does not have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions. (It's possible that a firehose will be released soon.)
+> - Users have already messed up their phone while fixing UFS and/or partitioning the device. So please **EXTREMELY** careful and follow everything.
 
 > [!IMPORTANT]
-> **THIS WILL WIPE ALL YOUR ANDROID™ DATA**
+> **THIS WILL WIPE ALL OF THE DATA ON YOUR PHONE**
 >
 > We don't take any responsibility for any damage done to your phone. By following this guide, you agree to take full responsibility of your actions. We have done some testing,
 >
 > but this is **STILL IN PREVIEW** and things can go wrong.
-> Windows 11 os samsung a52q is unstable so please run at your own risk. dont daily drive it
+> Windows 11 on the Samsung A52q is very unstable so please run at your own risk.
+> It's not reccomended to daily drive Windows 11 on this phone at the time of writing.
 
 **PLEASE READ AND BE SURE TO UNDERSTAND THE ENTIRE GUIDE BEFORE STARTING**
 
-Before you begin installing windows on your A52, make sure you have the following things
+Before you begin installing Windows on your A52, make sure you have the following things.
 
 ## Prerequisties:
-   - PC / Laptop with Windows (Recommended: Windows 10 or higher/ Any Linux distro like Ubuntu 24.0 or latest )
+   - PC / Laptop (It's recommended to use Windows 10 or higher or any Linux distro, we recommend Ubuntu 24.0 or higher.)
    - [ADB](https://developer.android.com/studio/releases/platform-tools#downloads)
    - [TWRP](https://twrp.me/samsung/samsunggalaxya52q.html)
    - Unlocked Bootloader ( [Unlock the Bootloader](../UnlockingBootloader.md) from here)
