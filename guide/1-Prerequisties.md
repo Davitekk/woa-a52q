@@ -68,7 +68,7 @@ It is highly EXTREMELYT recommended to [backup important partitions](../BackingU
 Please follow the provided guide, then come back once you're done.
 
 ## Step-4
-## Fixing UFS GPTs
+## Fixing UFS GPTs and its LUNs
 
 > [!CAUTION]
 > This Section will Brick your Device if not Followed correctly!
@@ -81,8 +81,8 @@ Samsung sets their UFS (the LUN 0) on Snapdragon Devices (including A52 4G) Offl
 Open Disk Manager on your PC and Find the Disk with way to many Partitions. <br>
 Right Click the Disk and Press `Online`.
 
-![Preview](Pictures/Preview-1.png)
-![Preview](Pictures/Preview-2.png)
+![Preview](../Pictures/Preview-1.png)
+![Preview](../Pictures/Preview-6.png)
 
 Now Windows set it to Online and it should now be one Large Unformated Partition. <br>
 Whatever you do, ***Don't* Reboot your Device!** at all!! <br>
@@ -108,7 +108,7 @@ chmod 744 /cache/gdisk
 ```
 Once you Executed the Commands you should see a GPT Corrupted Warning like this:
 
-![Preview](Pictures/Preview-3.png)
+![Preview](../Pictures/Preview-3.png)
 
 Run these Commands in gdisk to Repair your GPT, First Enter `r`, That will Enter the Recovery Options. <br>
 Then Enter `c`, That will now Repair your GPT, Now just Enter `w` and Confirm with `y` to Write the Changes. <br>
@@ -117,7 +117,7 @@ If all Partitions are there after using `p`, Exit using `q` and Power Off your D
 please make sure you see all partitions are there in your phone using `p`.<br>
 Now lets fix all other LUNs so that Windows dont mess up with other LUNs.
 
-## Repairing UFS LUNs
+## Fixing-UFS-GPTs
 
 First download [Windows gdisk](https://sourceforge.net/projects/gptfdisk/files/gptfdisk/1.0.3/gdisk-binaries/gdisk-windows-1.0.3.zip/download)<br>
 Then, just Extract the .zip File.<br>
@@ -127,13 +127,13 @@ Flash or Boot the UEFI Image from (#Step-2). <br>
 Once you did that, Reboot your Device and then Hold Volume Down when you see the Project Silicium Logo to enter Mass Storage. <br>
 If you did that Correctly, You should see a Blue Phone on your Device now:
 
-![Preview](Pictures/Preview-2.png)
+![Preview](../Pictures/Preview-2.png)
 
 At the Bottom of your Screen is some Text, Press the Volume Buttons until you see: `Current LUN: 0`. <br>
 Once it says that, Press the Power Button to Confirm, Connect your Device now to your PC. <br>
 Your PC should see a Large Disk with way to many Partitions in Disk Manager:
 
-![Preview](Pictures/Preview-3.png)
+![Preview](../Pictures/Preview-3.png)
 
 Get the Disk Number of the new Disk, In the Picture it's `2`. <br>
 Now open a Command Prompt Window as Admin in the Directory where you Extracted the gdisk .zip File. <br>
@@ -144,8 +144,8 @@ After that, Just run gdisk on the new Disk:
 
 You should now see Text like in this Pictures:
 
-![Preview](Pictures/Preview-4.png)
-![Preview](Pictures/Preview-5.png)
+![Preview](../Pictures/Preview-4.png)
+![Preview](../Pictures/Preview-5.png)
 
 If you see the GPT Corrupted Warning in your Command Prompt like in the second Picture, then you need to Repair the GPT Table. <br>
 
@@ -185,7 +185,7 @@ Save the Changes by entering `w` and confirming with `y`.
 
 Now reopen gdisk again and Check if you see Corrupted GPT Warning:
 
-![Preview](Pictures/Preview-5.png)
+![Preview](../Pictures/Preview-5.png)
 
 If you do, Enter `r`, then enter `c` and confirm with `y`, That Fixes the GPT Table, <br>
 Now save the Changes again using `w` and confirming with `y`.
