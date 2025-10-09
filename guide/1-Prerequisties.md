@@ -42,7 +42,7 @@ Table of Contents:
    * [Unlocking the Bootloader](#unlocking-the-bootloader)
    * [Flashing UEFI and TWRP](#flashing-uefi-and-twrp)
    * [Backing up Important Partitions](#backing-up-important-partitions)
-   * [Fixing UFS GPTs and its LUNs](#Fixing-UFS-GPTs)
+   * [Fixing UFS GPTs and its LUNs](#fixing-ufs-gpts-and-its-luns)
    * [Partitioning](#partitioning)
    * [Activating Mass Storage Mode](#activating-mass-storage-mode)
    * [Installing Windows](#installing-windows)
@@ -108,22 +108,22 @@ chmod 744 /cache/gdisk
 ```
 Once you Executed the Commands you should see a GPT Corrupted Warning like this:
 
-![Preview](../Pictures/Preview-3.png)
+![Preview](../Pictures/Preview-5.png)
 
 Run these Commands in gdisk to Repair your GPT, First Enter `r`, That will Enter the Recovery Options. <br>
 Then Enter `c`, That will now Repair your GPT, Now just Enter `w` and Confirm with `y` to Write the Changes. <br>
 After you ran all these Commands it should Exit, Once it did, Rerun the gdisk Command and check if everything is Fine now. <br>
 If all Partitions are there after using `p`, Exit using `q` and Power Off your Device.
 please make sure you see all partitions are there in your phone using `p`.<br>
-Now lets fix all other LUNs so that Windows dont mess up with other LUNs.
+Now lets fix all other LUNs so that Windows doesnt mess up with other LUNs.
 
-## Fixing-UFS-GPTs
+## Fixing UFS LUNs
 
 First download [Windows gdisk](https://sourceforge.net/projects/gptfdisk/files/gptfdisk/1.0.3/gdisk-binaries/gdisk-windows-1.0.3.zip/download)<br>
 Then, just Extract the .zip File.<br>
 
-To Repair the UFS LUNs you will need UEFI Image. <br>
-Flash or Boot the UEFI Image from (#Step-2). <br>
+To Repair the UFS LUNs you will need UEFI Image of A52q. <br>
+Flash the UEFI Image from (#Step-2). <br>
 Once you did that, Reboot your Device and then Hold Volume Down when you see the Project Silicium Logo to enter Mass Storage. <br>
 If you did that Correctly, You should see a Blue Phone on your Device now:
 
@@ -253,4 +253,68 @@ If formating userdata gives a error reboot again to recovery and format userdata
 
 ***⚠️ End of the Dangerous Section! ⚠️***
 
+Now that you are done with the most important thing, lets go and install windows 11 24h2 on it.
 
+# Step-6
+## Installing Windows
+## Windows Image download (Step 6.1)
+
+[UUP Dump](https://uupdump.net/) is recommended to get a Windows 10/11 ARM64 ISO Image. <br /> 
+Choose a 24H2 Build and select all Options you prefer. <br />
+After that download the zip File and extract it on your PC / Laptop. (The Path should not contain any spaces) <br />
+Then Open the extracted Folder and run the Build script, wait once it is finished. (Some AntiVirus Programs stop the Build so disbale windows antivirus on your pc) <br />
+A ISO will appear in the Folder, open the ISO File and extract the install.wim from `sources` and place it somewhere, where you can reach it.
+
+## Windows image install (Step 6.2)
+Reboot your a52 to UEFI image and press volume down to enter Mass Storage mode
+Then connect your Device to the PC / Laptop and find the Windows and esp partition. <br />
+Open diskpart in Command Promt and Find all needed Partitions:
+```
+# NOTE: Most likely, your system itself will assign a letter to the win partition.
+DISKPART> lis dis
+# you can findout the Device ID by looking at the Sizes you may regonize your Device Internal Storage Size.
+DISKPART> sel dis <Device ID>
+DISKPART> lis par
+DISKPART> sel par <Number + 1>
+# Use a other Letter if "X" is not availbe.
+DISKPART> assign letter X
+DISKPART> sel par <Number + 2>
+# Use a other Letter if "R" is not availbe.
+DISKPART> assign letter R
+DISKPART> exit
+```
+If you get eror like "the drive is removable so you cannot assign letter to ESP partition" something like that, then install diskgenious software and then mount the ESP partition of a52 to your pc with `X` or `any letter` via disk genius software.
+
+Now we will apply install.wim to win ntfs partition using dism:
+```
+# R: Is what we assigned to the win partition in the diskpart, replace the letter if you used another letter for your win partition.
+dism /apply-image /ImageFile:<Path to install.wim> /index:1 /ApplyDir:R:\
+```
+After that we need to create the Boot Files other wise our UEFI won't regonise Windows:
+```
+# R: and X: Is what we assigned fo Fat32 ESP partition in the diskpart, replace the letter if you used another letter.
+bcdboot R:\Windows /s X: /f UEFI
+```
+## Configure BCD (Step 6.3)
+
+Recovery mode of windows for phones is very dangerous and when you enter that, it will screw all of your phone's partition adn will easily brick your a52 or any mobile device. a system can boot into recovery mode via 2 methods. Either via 3 times failed boot and automatic recovery mode or via manually so we can disable that via BCD edit. But after BCD edit, we will also manually delete the WinRE binary which will permanently disable windows recovery on your phone.<br>
+
+To do that:<br>
+cd into the EFI Partition of your a52 and edit some BCD Values:
+```
+# Start CMD as Admin if you can't access The ESP Partition.
+# X: Is what we assinged to ESP partition in the diskpart or disk genius, replace the letter if you used another letter.
+cd X:\EFI\Microsoft\Boot
+bcdedit /store BCD /set "{default}" testsigning on
+bcdedit /store BCD /set "{default}" nointegritychecks on
+bcdedit /store BCD /set "{default}" recoveryenabled no
+```
+AFter that cd into Win partition of your a52:
+```
+
+# R: is what we assigned to win partition in diskpart, replace the letter if you used another letter.
+cd R:\Windows\System32\Recovery
+# and delete WinRE.wim file from here
+del WinRE.wim
+# if you dont find the file here, find the WinRE.wim in System32 folder everywhere and delete that (if you dont find that in Recovery folder for some reason)
+```
