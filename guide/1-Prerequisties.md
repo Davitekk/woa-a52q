@@ -34,7 +34,8 @@ Before you begin installing windows on your A52, make sure you have the followin
    - install.wim from a Windows 11 24H2 ISO
    - [Parted](https://cdn.discordapp.com/attachments/1057409313381040261/1275435724195496048/parted?ex=68e85755&is=68e705d5&hm=5ac60912de2fbd785f2e83c9ecf1d613a49b486141d215013d2d0382f9685a6c&)
    - [GDisk](https://cdn.discordapp.com/attachments/1057409313381040261/1319684671486824478/gdisk?ex=68e87a60&is=68e728e0&hm=0a4e2dad4c8e716b8dcf06387149b984cbdb6bbec7bc2859fe939bc6e58a8de6&)
-   - [A52q drivers](https://github.com/woa-a52s/Samsung-A52s-5G-Releases/releases/latest)
+   - [A52q drivers](https://github.com/arminask/windows_samsung_platforms)
+   - A Samsung A52 4G
 
 Table of Contents:
    * [Files/Tools Needed](#Prerequisties)
@@ -319,6 +320,7 @@ del WinRE.wim
 # if you dont find the file here, find the WinRE.wim in System32 folder everywhere and delete that (if you dont find that in Recovery folder for some reason)
 ```
 
-## Apply Drivers (Step 6.4)
+# Step-7
+## Installing the Drivers
 Now will have to apply Drivers to the windows on a52.<br>
 First downalod this https://github.com/arminask/windows_samsung_platforms/archive/refs/heads/a52q.zip
