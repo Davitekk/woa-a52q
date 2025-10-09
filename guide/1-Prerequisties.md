@@ -127,9 +127,9 @@ Then, just Extract the .zip File.<br>
 To Repair the UFS LUNs you will need UEFI Image of A52q. <br>
 Flash the UEFI Image from (#Step-2). <br>
 Once you did that, Reboot your Device and then Hold Volume Down when you see the Project Silicium Logo to enter Mass Storage. <br>
-If you did that Correctly, You should see a Blue Phone on your Device now:
+If you did that Correctly, You should see a Blue Phone on your Device now:<br>
 
-<img align="right" src="https://github.com/Davitekk/woa-a52q/blob/main/Pictures/Preview-2.png?raw=true" width="350">
+!<img align="right" src="https://github.com/Davitekk/woa-a52q/blob/main/Pictures/Preview-2.png?raw=true" width="350">
 
 At the Bottom of your Screen is some Text, Press the Volume Buttons until you see: `Current LUN: 0`. <br>
 Once it says that, Press the Power Button to Confirm, Connect your Device now to your PC. <br>
