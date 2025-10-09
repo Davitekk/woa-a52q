@@ -15,7 +15,7 @@ This project is in an early stage, all the files here have been contributed by o
 ## Get started
 - [Project status](https://github.com/Project-Silicium/Mu-Silicium/blob/main/Status.md#samsung-galaxy-a52)
 
-- [Installation instructions](guide/1-partition.md)
+- [Installation instructions](guide/1-Prerequisties.md)
 
 
 
