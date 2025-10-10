@@ -323,4 +323,4 @@ del WinRE.wim
 # Step-7
 ## Installing the Drivers
 Now will have to apply Drivers to the windows on a52.<br>
-First downalod this https://github.com/arminask/windows_samsung_platforms/archive/refs/heads/a52q.zip
+Consider following the [Applying drivers on a52q](drivers.md)
