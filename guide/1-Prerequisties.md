@@ -1,39 +1,40 @@
 # Install Windows on Galaxy A52 4G
 
-# JUST wait here and read this all before beginning !!!!!!
+## Please read everything carefully and don't skip any parts, doing so, may brick your device!
 
 ## Disclaimers
 
 > [!WARNING]
-> - If you see a warning and/or error during the process which is not specified in the guides, it is NOT normal then. Contact us on Discord if you see anything odd, but do not continue or proceed on your own, you will break things further.
+> - If you see a warning and/or error during the process which is not specified in the guides, it is NOT normal. Contact us on Discord if you see anything odd, but do not continue or proceed on your own, you may break things further.
 > - Don't rerun the commands if you interrupt the process. You may break your partition table.
 > - Do not run all commands at once. 
-> - Do not commit *any* typo with *any* commands.
+> - Do not commit *any* typo with *any* command.
 > - Be familiar with command line interfaces.
-> - ALso Note that Samsung A52 4G doesnot have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions
-> - Users have already messed up their phone while fixing UFS and/or partitioning the device. So please be very very ultra careful
+> - Also Note that Samsung A52 4G does not have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions. (It's possible that a firehose will be released soon.)
+> - Users have already messed up their phone while fixing UFS and/or partitioning the device. So please **EXTREMELY** careful and follow everything.
 
 > [!IMPORTANT]
-> **THIS WILL WIPE ALL YOUR ANDROID™ DATA**
+> **THIS WILL WIPE ALL OF THE DATA ON YOUR PHONE**
 >
 > We don't take any responsibility for any damage done to your phone. By following this guide, you agree to take full responsibility of your actions. We have done some testing,
 >
 > but this is **STILL IN PREVIEW** and things can go wrong.
-> Windows 11 os samsung a52q is unstable so please run at your own risk. dont daily drive it
+> Windows 11 on the Samsung A52q is very unstable so please run at your own risk.
+> It's not reccomended to daily drive Windows 11 on this phone at the time of writing.
 
 **PLEASE READ AND BE SURE TO UNDERSTAND THE ENTIRE GUIDE BEFORE STARTING**
 
-Before you begin installing windows on your A52, make sure you have the following things
+Before you begin installing Windows on your A52, make sure you have the following things.
 
 ## Prerequisties:
-   - PC / Laptop with Windows (Recommended: Windows 10 or higher/ Any Linux distro like Ubuntu 24.0 or latest )
+   - PC / Laptop (It's recommended to use Windows 10 or higher or any Linux distro, we recommend Ubuntu 24.0 or higher.)
    - [ADB](https://developer.android.com/studio/releases/platform-tools#downloads)
    - [TWRP](https://twrp.me/samsung/samsunggalaxya52q.html)
    - Unlocked Bootloader ( [Unlock the Bootloader](../UnlockingBootloader.md) from here)
-   - [UEFI Image](https://cdn.discordapp.com/attachments/1214286539593613344/1425171690089877635/Mu-a52q.img?ex=68e89851&is=68e746d1&hm=f10b087c98648d498cd1e3b4edab407c4190704de889639ae48902470d309151&)
+   - [UEFI Image](https://github.com/Davitekk/woa-a52q/releases/download/UEFI/Mu-a52q.img)
    - install.wim from a Windows 11 24H2 ISO
-   - [Parted](https://cdn.discordapp.com/attachments/1057409313381040261/1275435724195496048/parted?ex=68e85755&is=68e705d5&hm=5ac60912de2fbd785f2e83c9ecf1d613a49b486141d215013d2d0382f9685a6c&)
-   - [GDisk](https://cdn.discordapp.com/attachments/1057409313381040261/1319684671486824478/gdisk?ex=68e87a60&is=68e728e0&hm=0a4e2dad4c8e716b8dcf06387149b984cbdb6bbec7bc2859fe939bc6e58a8de6&)
+   - [Parted](https://github.com/Davitekk/woa-a52q/releases/download/Parted/parted)
+   - [GDisk](https://github.com/Davitekk/woa-a52q/releases/download/Gdisk/gdisk)
    - [A52q drivers](https://github.com/arminask/windows_samsung_platforms)
    - A Samsung A52 4G
    - A BRAIN with knowledge of this stuff
