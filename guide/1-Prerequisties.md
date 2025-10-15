@@ -37,6 +37,7 @@ Before you begin installing Windows on your A52, make sure you have the followin
    - [GDisk](https://github.com/Davitekk/woa-a52q/releases/download/Gdisk/gdisk)
    - [A52q drivers](https://github.com/arminask/windows_samsung_platforms)
    - A Samsung A52 4G
+   - A BRAIN with knowledge of this stuff
 
 Table of Contents:
    * [Files/Tools Needed](#Prerequisties)
@@ -46,7 +47,6 @@ Table of Contents:
    * [Backing up Important Partitions](#backing-up-important-partitions)
    * [Fixing UFS GPTs and its LUNs](#fixing-ufs-gpts-and-its-luns)
    * [Partitioning](#partitioning)
-   * [Activating Mass Storage Mode](#activating-mass-storage-mode)
    * [Installing Windows](#installing-windows)
    * [Installing the drivers](#installing-the-drivers)
    * [Boot Windows](#boot-windows)
@@ -87,7 +87,7 @@ Right Click the Disk and Press `Online`.
 ![Preview](../Pictures/Preview-6.png)
 
 Now Windows set it to Online and it should now be one Large Unformated Partition. <br>
-Whatever you do, ***Don't* Reboot your Device!** at all!! <br>
+***Don't* Reboot your Device! at all!!*** <br>
 You need to Repair it now, install gdisk we provided you in the prerequisties section. <br>
 
 Then transfer that gdisk binary to your phone. considering it in the downlaods folder:
@@ -113,18 +113,19 @@ Once you Executed the Commands you should see a GPT Corrupted Warning like this:
 ![Preview](../Pictures/Preview-5.png)
 
 Run these Commands in gdisk to Repair your GPT, First Enter `r`, That will Enter the Recovery Options. <br>
-Then Enter `c`, That will now Repair your GPT, Now just Enter `w` and Confirm with `y` to Write the Changes. <br>
+Then Enter `c`, That will copy the backup the GPT of LUN0 which is stored at the end, Now just Enter `w` and Confirm with `y` to Write the Changes. <br>
 After you ran all these Commands it should Exit, Once it did, Rerun the gdisk Command and check if everything is Fine now. <br>
 If all Partitions are there after using `p`, Exit using `q` and Power Off your Device.
-please make sure you see all partitions are there in your phone using `p`.<br>
-Now lets fix all other LUNs so that Windows doesnt mess up with other LUNs.
+please make sure you see all partitions are there in your phone using `p` before rebooting.<br>
+Now lets fix all other LUNs so that Windows doesnt mess up with other LUNs. 
 
 ## Fixing UFS LUNs
 
+Because android recovery TWRP cannot modify other LUNs (because all other luns except LUN0 are write-protected) we will have to use the UEFI image which bypasses these protections and then fixes the GPT tables of other LUNS using windows gdisk binary. So<br>
 First download [Windows gdisk](https://sourceforge.net/projects/gptfdisk/files/gptfdisk/1.0.3/gdisk-binaries/gdisk-windows-1.0.3.zip/download)<br>
 Then, just Extract the .zip File.<br>
 
-To Repair the UFS LUNs you will need UEFI Image of A52q. <br>
+To Repair the other UFS LUNs you will need UEFI Image of A52q. <br>
 Flash the UEFI Image from (#Step-2). <br>
 Once you did that, Reboot your Device and then Hold Volume Down when you see the Project Silicium Logo to enter Mass Storage. <br>
 If you did that Correctly, You should see a Blue Phone on your Device now:
@@ -149,7 +150,8 @@ You should now see Text like in this Pictures:
 ![Preview](../Pictures/Preview-4.png)
 ![Preview](../Pictures/Preview-5.png)
 
-If you see the GPT Corrupted Warning in your Command Prompt like in the second Picture, then you need to Repair the GPT Table. <br>
+```
+If you see the GPT Corrupted Warning in your Command Prompt like in the second Picture, then you need to Repair the GPT Table for this LUN again. <br>
 
 To do that, Enter `r`, That will enter the Recovery Options. <br>
 Once you did that, Enter `c` and confirm with `y`, That will repair the GPT Table. <br>
@@ -157,9 +159,9 @@ Now just Save the Changes by entering `w` and confirming with `y`. <br>
 It will throw you out of gdisk, Reenter it by using the same Command as before, You should now not see the Warning anymore.
 
 Otherwise you can Skip this Step to repair the GPT Table.
+```
 
-
-After you Fixed your GPT Table, Check for other Problems by entering `v`. <br>
+Then, Check for other Problems by entering `v`. <br>
 Only these 2 Problems matter:
 ```
 NOTE: These are no the Entire Messages.
@@ -173,34 +175,35 @@ Using 'k' on the experts' menu can adjust this gap.
 ---------------------------------------------------------------------------------
 ```
 
-If you don't see any of these 2 Problems, You can skip this LUN, Enter `q` to Exit and Press Volume Up on your Device and Select the next LUN. <br>
-Then follow this Section for the next LUN, If you see atleast one of these 2 Problems, You need to Fix them. <br>
+If you don't see any of these 2 Problems, Its ok then<br>
+But If you see atleast one of these 2 Problems, You need to Fix them. <br>
 
-If you see the Problem in the First Box, Do these Things to Fix it. <br>
+To do that: <br>
 First, Enter the Expert Menu by entering `x`, Then enter `j`, It will ask you for a Value, Just Press Enter there. <br>
-If you see the Problem in the second Box too, Run `k` in the Expert Menu, It will also ask you for a Value, Press Enter there again. <br>
+If you see the Problem 2 too, Run `k` in the Expert Menu, It will also ask you for a Value, Press Enter there again. <br>
 Now all Problems are Fixed.
 
 Save the Changes by entering `w` and confirming with `y`.
 
 ## Verify Changes
 
-Now reopen gdisk again and Check if you see Corrupted GPT Warning:
+Now reopen gdisk again on the working LUN and Check and ***VERIFY*** if you see Corrupted GPT Warning:
 
 ![Preview](../Pictures/Preview-5.png)
 
 If you do, Enter `r`, then enter `c` and confirm with `y`, That Fixes the GPT Table, <br>
 Now save the Changes again using `w` and confirming with `y`.
 
-Reopen gdisk again to Check if the Corrupted GPT Warning is Gone and if the 2 Problems in `v` are Gone. <br>
-If they are, Exit gdisk with `q` and Press Volume Up on your Device, Select the next LUN and Follow [Repairing UFS LUNs](#repairing-ufs-luns) Section again and again upto LUN5.
+Reopen gdisk again to Check if the Corrupted GPT Warning is Gone and if the 2 Problems in `v` are Gone. And also see wether you can clearly see all the partitions using `p` or not.<br>
+If no warnings and also you can see partitions, Exit gdisk with `q` and Press Volume Up on your Device, Select the next LUN and Follow [Repairing UFS LUNs](#repairing-ufs-luns) Section again and again upto LUN5.
 
-Once you're unable to Select the next LUN on your Device after pressing volume down button, that means you Reached the End, Disconnect your Device and Select `Power Off`.
+Once you're unable to Select the next LUN on your Device after pressing volume up button, that means you Reached the End, Disconnect your Device from PC and Select `Power Off`.
 
 # Step-5
 ## Partition UFS
 
-***⚠️ In this Section of the Guide you can easly brick your Device! ⚠️***
+***⚠️ In this Section of the Guide you can easly brick your Device if not followed correctly!! ⚠️***<br>
+***WARNING: Please do NOT rerun same commands again and again during this process. YOU WILL EASILY CORRUPT THE PARTITION TABLE AND BRICK YOUR DEVICE !!!***
 
 Boot into TWRP recovery and unmount `userdata`, then open Command Promt on your PC / Laptop and enter ADB Shell. <br />
 Once in ADB Shell create a directory called `worksapce` in `/`:
@@ -324,4 +327,4 @@ del WinRE.wim
 # Step-7
 ## Installing the Drivers
 Now will have to apply Drivers to the windows on a52.<br>
-First downalod this https://github.com/arminask/windows_samsung_platforms/archive/refs/heads/a52q.zip
+Consider following the [Applying drivers on a52q](drivers.md)
