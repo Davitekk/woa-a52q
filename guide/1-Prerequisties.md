@@ -10,7 +10,10 @@
 > - Do not run all commands at once. 
 > - Do not commit *any* typo with *any* command.
 > - Be familiar with command line interfaces.
-> - Also Note that Samsung A52 4G does not have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions. (It's possible that a firehose will be released soon.)
+> - ~~Also Note that Samsung A52 4G does not have *ANY EDL FIREHOSE LOADER* so *PLEASE and PLEASE* be very careful as if things got wrong, you *Cannot* repair this device then without giving any money to third-party repair solutions. (It's possible that a firehose will be released soon.)~~
+> - 
+> - Edit: firehose loader for A52 is released. there is the file in main directory. have fun trying to do this without worrying :)
+> - 
 > - Users have already messed up their phone while fixing UFS and/or partitioning the device. So please **EXTREMELY** careful and follow everything.
 
 > [!IMPORTANT]
